@@ -1,178 +1,241 @@
 <template>
-
-  <body>
-    <div class="container">
-      <header class="main-header">
-        <img class="header-logo" :src="headerLogo" alt="joystick-2" />
-        <h1 id="my-header">Lorem ipsum dolor sit amet consectetur</h1>
-        <div class="header-objects">
-          <nav class="header">
-            <div class="searchbar-and-btn">
-              <form action="#">
-                <input
-                  class="searchbar"
-                  id="searchInput"
-                  type="text"
-                  placeholder="Search.."
-                  name="search"
-                  data-search
-                />
-                <button class="btn-search" id="btnSearch" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </form>
-            </div>
-            <div class="links">
-              <a
-                class="nav-links"
-                href="https://www.playstation.com/pt-br/"
-                target="_blank"
-                >Playstation</a
+  <div class="container">
+    <header class="main-header">
+      <img class="header-logo" :src="headerLogo" alt="joystick-2" />
+      <h1 id="my-header">Lorem ipsum dolor sit amet consectetur</h1>
+      <div class="header-objects">
+        <nav class="header">
+          <div class="searchbar-and-btn">
+            <form action="#">
+              <input
+                class="searchbar"
+                id="searchInput"
+                type="text"
+                placeholder="Search.."
+                v-model="search"
+                data-search
+              />
+              <button
+                @click="functionSearch"
+                class="btn-search"
+                id="btnSearch"
+                type="button"
               >
-              <a
-                class="nav-links"
-                href="https://www.xbox.com/pt-BR"
-                target="_blank"
-                >Xbox</a
-              >
-              <a
-                class="nav-links"
-                href="https://www.nintendo.com/pt_BR/?L000-11:ch=pdpd"
-                target="_blank"
-                >Nintendo</a
-              >
-            </div>
-          </nav>
-        </div>
-      </header>
-      <header class="sub-header">
-        <h2 id="my-subheader">Lorem ipsum dolor sit amet consectetur</h2>
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
+          </div>
+          <div class="links">
+            <a
+              class="nav-links"
+              href="https://www.playstation.com/pt-br/"
+              target="_blank"
+              >Playstation</a
+            >
+            <a
+              class="nav-links"
+              href="https://www.xbox.com/pt-BR"
+              target="_blank"
+              >Xbox</a
+            >
+            <a
+              class="nav-links"
+              href="https://www.nintendo.com/pt_BR/?L000-11:ch=pdpd"
+              target="_blank"
+              >Nintendo</a
+            >
+          </div>
+        </nav>
+      </div>
+    </header>
+    <header class="sub-header">
+      <h2 id="my-subheader">Lorem ipsum dolor sit amet consectetur</h2>
 
-        <!-- INICIO CAROUSEL container -->
+      <!-- INICIO CAROUSEL container -->
 
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-          <!-- Indicators -->
-          <ol class="carousel-indicators">
-            <li
-              type="button"
-              data-target="#myCarousel"
-              data-slide-to="0"
-              class="active"
-            ></li>
-            <li type="button" data-target="#myCarousel" data-slide-to="1"></li>
-            <li type="button" data-target="#myCarousel" data-slide-to="2"></li>
-            <li type="button" data-target="#myCarousel" data-slide-to="3"></li>
-            <li type="button" data-target="#myCarousel" data-slide-to="4"></li>
-          </ol>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li
+            type="button"
+            data-target="#myCarousel"
+            data-slide-to="0"
+            class="active"
+          ></li>
+          <li type="button" data-target="#myCarousel" data-slide-to="1"></li>
+          <li type="button" data-target="#myCarousel" data-slide-to="2"></li>
+          <li type="button" data-target="#myCarousel" data-slide-to="3"></li>
+          <li type="button" data-target="#myCarousel" data-slide-to="4"></li>
+        </ol>
 
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner" role="listbox">
-            <div class="item active">
-              <img
-                class="sld-img"
-                :src="tlouIIOnPage"
-                alt="The Last of Us Part II"
-              />
-              <div class="carousel-caption"></div>
-            </div>
-
-            <div class="item">
-              <img
-                class="sld-img"
-                :src="gowOnPage"
-                alt="God of War"
-              />
-              <div class="carousel-caption"></div>
-            </div>
-
-            <div class="item">
-              <img
-                class="sld-img"
-                :src="re2OnPage"
-                alt="Resident Evil 2 Remake"
-              />
-              <div class="carousel-caption"></div>
-            </div>
-
-            <div class="item">
-              <img
-                class="sld-img uncharted"
-                :src="unchartedOnPage"
-                alt="Uncharted 4 - A Thief's End"
-              />
-              <div class="carousel-caption"></div>
-            </div>
-
-            <div class="item">
-              <img
-                class="sld-img"
-                :src="crashOnPage"
-                alt="Crash Bandicoot N' Sane Trilogy"
-              />
-              <div class="carousel-caption"></div>
-            </div>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <img
+              class="sld-img"
+              :src="tlouIIOnPage"
+              alt="The Last of Us Part II"
+            />
+            <div class="carousel-caption"></div>
           </div>
 
-          <!-- Left and right controls -->
-          <a
-            class="left carousel-control"
-            href="#myCarousel"
-            role="button"
-            data-slide="prev"
-          >
-            <span
-              class="glyphicon glyphicon-chevron-left"
-              aria-hidden="true"
-            ></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a
-            class="right carousel-control"
-            href="#myCarousel"
-            role="button"
-            data-slide="next"
-          >
-            <span
-              class="glyphicon glyphicon-chevron-right"
-              aria-hidden="true"
-            ></span>
-            <span class="sr-only">Next</span>
-          </a>
+          <div class="item">
+            <img class="sld-img" :src="gowOnPage" alt="God of War" />
+            <div class="carousel-caption"></div>
+          </div>
+
+          <div class="item">
+            <img
+              class="sld-img"
+              :src="re2OnPage"
+              alt="Resident Evil 2 Remake"
+            />
+            <div class="carousel-caption"></div>
+          </div>
+
+          <div class="item">
+            <img
+              class="sld-img uncharted"
+              :src="unchartedOnPage"
+              alt="Uncharted 4 - A Thief's End"
+            />
+            <div class="carousel-caption"></div>
+          </div>
+
+          <div class="item">
+            <img
+              class="sld-img"
+              :src="crashOnPage"
+              alt="Crash Bandicoot N' Sane Trilogy"
+            />
+            <div class="carousel-caption"></div>
+          </div>
         </div>
 
-        <!--FIM DO CAROUSEL-->
-        <div class="header-list">
-          <h3 id="headerList" class="thirdHeader">
-            Lorem ipsum dolor sit amet 3
-          </h3>
-        </div>
-      </header>
-      <aside>
-        <div class="related-container">
-          <h4>My top 5 Games</h4>
-          <ul id="relatedList" class="related-list"></ul>
-        </div>
-      </aside>
-      <article>
-        <div id="list">
-          <ul class="list-games" id="listGames">
-            <div class="wrapper" />
-          </ul>
-        </div>
-      </article>
-    </div>
-  </body>
+        <!-- Left and right controls -->
+        <a
+          class="left carousel-control"
+          href="#myCarousel"
+          role="button"
+          data-slide="prev"
+        >
+          <span
+            class="glyphicon glyphicon-chevron-left"
+            aria-hidden="true"
+          ></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a
+          class="right carousel-control"
+          href="#myCarousel"
+          role="button"
+          data-slide="next"
+        >
+          <span
+            class="glyphicon glyphicon-chevron-right"
+            aria-hidden="true"
+          ></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+      <!--FIM DO CAROUSEL-->
+      <div class="header-list">
+        <h3 id="headerList" class="thirdHeader">
+          Lorem ipsum dolor sit amet 3
+        </h3>
+      </div>
+    </header>
+    <aside>
+      <div class="related-container">
+        <h4>My top 5 Games</h4>
+        <ul id="relatedList" class="related-list">
+          <li v-for="game in myTopFive" :key="game.Rank" class="related-post">
+            <div class="bs-example">
+              <a
+                class="top-link"
+                href="#gameModalgame.Rank"
+                data-toggle="modal"
+              >
+                <img
+                  :alt="game.Name"
+                  :src="require(`@/assets/${game.GamePhoto}`)"
+                  width="100"
+                  height="100"
+                />
+              </a>
+              <div id="gameModalgame.Rank" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button
+                        type="button"
+                        class="close"
+                        rank_id="game.Rank"
+                        data-dismiss="modal"
+                        aria-hidden="true"
+                      >
+                        X
+                      </button>
+                      <h4 class="modal-title">{{ game.Name }}</h4>
+                    </div>
+                    <div class="modal-body">
+                      <iframe
+                        id="game.Rank"
+                        width="560"
+                        height="315"
+                        src="game.Game_URL"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      >
+                      </iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p class="related-game">
+                  {{ game.Name }}<br />
+                  {{ relatedDiscription.genre }}: {{ game.Genre }}<br />
+                  {{ relatedDiscription.year }}: {{ game.Year }}<br />
+                  {{ relatedDiscription.platform }}: {{ game.Platform
+                  }}<br /><br />
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </aside>
+    <article>
+      <div>
+        <ul>
+          <li v-for="game in myJson" :key="game.Rank" class="itemGame">
+            <item-game-component :item="game"> </item-game-component>
+          </li>
+          <div class="wrapper" />
+        </ul>
+      </div>
+    </article>
+  </div>
 </template>
 
 <script>
-  import headerlogo from "/src/images/joystick-2.png"
-  import tlouII from "/src/images/banner-images/tlou.jpg"
-  import gow from "/src/images/banner-images/gow.jpg"
-  import re2 from "/src/images/banner-images/re2.png"
-  import uncharted from "/src/images/banner-images/uncharted.jpg"
-  import crash from "/src/images/banner-images/crash.jpg"
+import headerlogo from "/src/images/joystick-2.png";
+import tlouII from "/src/images/banner-images/tlou.jpg";
+import gow from "/src/images/banner-images/gow.jpg";
+import re2 from "/src/images/banner-images/re2.png";
+import uncharted from "/src/images/banner-images/uncharted.jpg";
+import crash from "/src/images/banner-images/crash.jpg";
+import ItemGameComponent from "./components/ItemGameComponent.vue";
+import myJson from "./list/games.json";
 
-  export default {
+export default {
+  components: {
+    ItemGameComponent,
+  },
   data: function () {
     return {
       headerLogo: headerlogo,
@@ -180,12 +243,39 @@
       gowOnPage: gow,
       re2OnPage: re2,
       unchartedOnPage: uncharted,
-      crashOnPage: crash
-    }
-  }
-}
+      crashOnPage: crash,
+      myJson: myJson,
+      search: "",
+      myTopFive: [],
+      relatedDiscription: {
+        genre: "Gênero",
+        year: "Ano de Lançamento",
+        platform: "Plataforma",
+      },
+    };
+  },
+  methods: {
+    functionSearch() {
+      let text = this.search.toLowerCase(); // pegando a string e transformando em caixa baixa
+      const stringFiltrada = myJson.filter((game) => {
+        //filtrando o array myJson por uma string
+        return (
+          game.Name.toString().toLowerCase().includes(text) ||
+          game.Platform.toString().toLowerCase().includes(text)
+        );
+      });
+      this.myJson = stringFiltrada;
+    },
 
-  
+    // mountImage(gamePhoto){
+    //   console.log("./static/"+gamePhoto);
+    //   return "./static/related-images/"+gamePhoto;
+    // }
+  },
+  mounted() {
+    this.myTopFive = this.myJson.slice(Math.max(myJson.length - 5, 1));
+  },
+};
 </script>
 
 <style>
@@ -306,13 +396,14 @@ h4 {
   font-weight: bold;
   text-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
 }
-
+/* 
 ul {
   margin-left: 50px;
   margin-bottom: 20px;
-}
+} */
 
 li {
+  float: left;
   font-size: 20px;
   margin-bottom: 10px;
 }
@@ -448,7 +539,7 @@ h2 {
   overflow: hidden;
   transition: all 0.4s;
   text-align: left;
-  padding: 55px 5px 35px 15px;
+  padding: 30px 25px 35px 0px;
   list-style: none;
   margin-left: 0;
   position: relative;
