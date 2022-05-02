@@ -198,9 +198,9 @@
               <div>
                 <p class="related-game">
                   {{ game.Name }}<br />
-                  {{ relatedDiscription.genre }}: {{ game.Genre }}<br />
-                  {{ relatedDiscription.year }}: {{ game.Year }}<br />
-                  {{ relatedDiscription.platform }}: {{ game.Platform
+                  {{ relatedDescription.genre }}: {{ game.Genre }}<br />
+                  {{ relatedDescription.year }}: {{ game.Year }}<br />
+                  {{ relatedDescription.platform }}: {{ game.Platform
                   }}<br /><br />
                 </p>
               </div>
@@ -247,7 +247,7 @@ export default {
       myJson: myJson,
       search: "",
       myTopFive: [],
-      relatedDiscription: {
+      relatedDescription: {
         genre: "Gênero",
         year: "Ano de Lançamento",
         platform: "Plataforma",
