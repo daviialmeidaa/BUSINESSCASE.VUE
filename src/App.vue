@@ -2,48 +2,39 @@
   <div class="container">
     <header class="main-header">
       <img class="header-logo" :src="headerLogo" alt="joystick-2" />
-      <h1 id="my-header">Lorem ipsum dolor sit amet consectetur</h1>
+      <h1 id="my-header">{{ headerText }}</h1>
       <div class="header-objects">
+        <div class="searchbar-and-btn">
+          <form action="#">
+            <input
+              class="searchbar"
+              id="searchInput"
+              type="text"
+              placeholder="Search.."
+              v-model="search"
+              data-search
+            />
+            <button
+              @click="functionSearch"
+              class="btn-search"
+              id="btnSearch"
+              type="button"
+            >
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
         <nav class="header">
-          <div class="searchbar-and-btn">
-            <form action="#">
-              <input
-                class="searchbar"
-                id="searchInput"
-                type="text"
-                placeholder="Search.."
-                v-model="search"
-                data-search
-              />
-              <button
-                @click="functionSearch"
-                class="btn-search"
-                id="btnSearch"
-                type="button"
-              >
-                <i class="fa fa-search"></i>
-              </button>
-            </form>
-          </div>
           <div class="links">
-            <a
-              class="nav-links"
-              href="https://www.playstation.com/pt-br/"
-              target="_blank"
-              >Playstation</a
-            >
-            <a
-              class="nav-links"
-              href="https://www.xbox.com/pt-BR"
-              target="_blank"
-              >Xbox</a
-            >
-            <a
-              class="nav-links"
-              href="https://www.nintendo.com/pt_BR/?L000-11:ch=pdpd"
-              target="_blank"
-              >Nintendo</a
-            >
+            <a class="nav-links" :href="playstation.link" target="_blank">{{
+              playstation.name
+            }}</a>
+            <a class="nav-links" :href="xbox.link" target="_blank">{{
+              xbox.name
+            }}</a>
+            <a class="nav-links" :href="nintendo.link" target="_blank">{{
+              nintendo.name
+            }}</a>
           </div>
         </nav>
       </div>
@@ -148,14 +139,15 @@
     </header>
     <aside>
       <div class="related-container">
-        <h4>My top 5 Games</h4>
+        <h4>{{ asideHeader }}</h4>
         <ul id="relatedList" class="related-list">
           <li v-for="game in myTopFive" :key="game.Rank" class="related-post">
             <div class="bs-example">
               <a
                 class="top-link"
-                href="#gameModalgame.Rank"
+                :href="`#gameModal${game.Rank}`"
                 data-toggle="modal"
+                @click="modalVideo"
               >
                 <img
                   :alt="game.Name"
@@ -164,14 +156,15 @@
                   height="100"
                 />
               </a>
-              <div id="gameModalgame.Rank" class="modal fade">
+              <div :id="`gameModal${game.Rank}`" class="modal fade">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
                       <button
+                        @click="closeModalVideo"
                         type="button"
                         class="close"
-                        rank_id="game.Rank"
+                        :rank_id="`${game.Rank}`"
                         data-dismiss="modal"
                         aria-hidden="true"
                       >
@@ -181,10 +174,10 @@
                     </div>
                     <div class="modal-body">
                       <iframe
-                        id="game.Rank"
+                        :id="`${game.Rank}`"
                         width="560"
                         height="315"
-                        src="game.Game_URL"
+                        :src="`${game.Game_URL}`"
                         title="YouTube video player"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -209,17 +202,37 @@
         </ul>
       </div>
     </aside>
-    <article>
+    <article class="all-items-game">
       <div>
         <ul>
           <li v-for="game in myJson" :key="game.Rank" class="itemGame">
-            <item-game-component :item="game"> </item-game-component>
+            <item-game-component id="list" :item="game"> </item-game-component>
           </li>
+
           <div class="wrapper" />
         </ul>
       </div>
     </article>
   </div>
+  <footer class="footer-distributed">
+    <div class="footer-right">
+      <a :href="footerData.twitter" target="_blank"
+        ><i class="fa fa-twitter"></i
+      ></a>
+      <a :href="footerData.linkedin" target="_blank"
+        ><i class="fa fa-linkedin"></i
+      ></a>
+      <a :href="footerData.github" target="_blank"
+        ><i class="fa fa-github"></i
+      ></a>
+    </div>
+
+    <div class="footer-left">
+      <p class="footer-links">Projeto: Business Case</p>
+
+      <p>{{ footerData.copy }}</p>
+    </div>
+  </footer>
 </template>
 
 <script>
@@ -231,13 +244,18 @@ import uncharted from "/src/images/banner-images/uncharted.jpg";
 import crash from "/src/images/banner-images/crash.jpg";
 import ItemGameComponent from "./components/ItemGameComponent.vue";
 import myJson from "./list/games.json";
+import "@ocrv/vue-tailwind-pagination/styles";
+// import VueTailwindPagination from '@ocrv/vue-tailwind-pagination';
 
 export default {
+  name: "PaginationExample",
   components: {
     ItemGameComponent,
+    // VueTailwindPagination,
   },
   data: function () {
     return {
+      headerText: "Business Case Vue",
       headerLogo: headerlogo,
       tlouIIOnPage: tlouII,
       gowOnPage: gow,
@@ -252,6 +270,32 @@ export default {
         year: "Ano de Lançamento",
         platform: "Plataforma",
       },
+      playstation: {
+        link: "https://www.playstation.com/pt-br/",
+        name: "Playstation",
+      },
+
+      xbox: {
+        link: "https://www.xbox.com/pt-BR",
+        name: "Xbox",
+      },
+
+      nintendo: {
+        link: "https://www.nintendo.com/pt_BR/?L000-11:ch=pdpd",
+        name: "Nintendo",
+      },
+
+      asideHeader: "Top Games",
+
+      footerData: {
+        copy: "Copyright © 2022 by Davi Almeida. All rights reserved.",
+        twitter: "https://twitter.com/DaviVianaz",
+        linkedin: "https://www.linkedin.com/in/almeidavi/",
+        github: "https://github.com/daviialmeidaa",
+      },
+      // currentPage: 1,
+      //       perPage: 12,
+      //       total: 20,
     };
   },
   methods: {
@@ -261,16 +305,35 @@ export default {
         //filtrando o array myJson por uma string
         return (
           game.Name.toString().toLowerCase().includes(text) ||
-          game.Platform.toString().toLowerCase().includes(text)
+          game.Platform.toString().toLowerCase().includes(text) ||
+          game.Year.toString().toLowerCase().includes(text) ||
+          game.Publisher.toString().toLowerCase().includes(text)
         );
       });
       this.myJson = stringFiltrada;
     },
 
-    // mountImage(gamePhoto){
-    //   console.log("./static/"+gamePhoto);
-    //   return "./static/related-images/"+gamePhoto;
-    // }
+    onChangePage(pageOfItems) {
+      // update page of items
+      this.pageOfItems = pageOfItems;
+    },
+
+    modalVideo(game) {
+      let modal = `${game.Rank}`.getAttribute("src");
+
+      return `#gameModal${game.Rank}`
+        .on("hide.bs.modal", function () {
+          `${game.Rank}`.getAttribute("src", "");
+        })(`##gameModal${game.Rank}`)
+        .on("show.bs.modal", function () {
+          `#${game.Rank}`.getAttribute("src", modal);
+        });
+    },
+
+    closeModalVideo() {
+      location.reload();
+      return false;
+    },
   },
   mounted() {
     this.myTopFive = this.myJson.slice(Math.max(myJson.length - 5, 1));
@@ -283,6 +346,7 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Roboto;
 }
 
 body {
@@ -297,7 +361,9 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: -60px;
+  /* position: absolute; */
 }
+
 .main-header {
   display: flex;
   align-items: center;
@@ -310,7 +376,7 @@ body {
 }
 
 .searchbar-and-btn {
-  margin-right: -50px;
+  margin-right: -10px;
   width: 300px;
 }
 
@@ -335,15 +401,15 @@ body {
 }
 
 nav {
-  font-size: 18px;
+  font-size: 12px;
 }
 
 .links {
   margin-top: 10px;
   display: flex;
-  align-items: initial;
+  align-items: center;
   /* gap: 5px; */
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 a {
@@ -374,7 +440,7 @@ h3 {
 h1 {
   font-size: 26px;
   text-transform: uppercase;
-  font-style: italic;
+  /* font-style: italic; */
   width: 507.234px;
   margin-right: 20%;
   justify-items: left;
@@ -382,13 +448,13 @@ h1 {
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 30px;
   margin-bottom: 30px;
   font-weight: bold;
 }
 
 h4 {
-  font-size: 20px;
+  font-size: 15;
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 10px;
@@ -423,7 +489,8 @@ li:last-child {
 a:link {
   color: #0070c0;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 15px;
+  margin-left: 7px;
 }
 a:visited {
   /* color: #777; */
@@ -431,14 +498,9 @@ a:visited {
 }
 
 a:hover {
-  color: orangered;
-  font-weight: bold;
-  text-decoration: underline orange;
-}
-
-a:active {
-  background-color: black;
-  font-style: italic;
+  /* color: orangered;
+  font-weight: bold; */
+  text-decoration: underline #0070c0;
 }
 
 nav a:link {
@@ -489,9 +551,13 @@ h2 {
   grid-column: 1 / -1;
 }
 
+.carousel-indicators {
+  margin-left: -15px;
+}
 .carousel {
   margin-top: 5px;
-  justify-content: left;
+  margin-right: 0;
+  justify-content: center;
   display: flex;
   align-items: center;
   transition: width 2s linear 1s;
@@ -533,18 +599,28 @@ h2 {
 }
 
 .itemGame {
-  font-size: 12px;
+  font-size: 10px;
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
   border-radius: 11px;
   overflow: hidden;
   transition: all 0.4s;
   text-align: left;
-  padding: 30px 25px 35px 0px;
+  padding: 30px 10px 35px 0px;
   list-style: none;
-  margin-left: 0;
+  margin-left: 30px;
   position: relative;
   cursor: pointer;
-  margin-bottom: 0;
+  margin-bottom: 40px;
+  padding-left: 10px;
+  width: 240px;
+  height: 300px;
+}
+
+.pagination {
+  position: relative;
+  justify-self: center;
+  margin-left: 32%;
+  font-weight: 100;
 }
 
 .itemGame:hover {
@@ -559,7 +635,7 @@ h2 {
   border-radius: 11px;
   overflow: hidden;
   transition: all 0.4s;
-  margin-top: -25px;
+  margin-top: -18px;
   justify-self: flex-start;
   /* margin-bottom: 55px; */
   gap: 0.4rem;
@@ -574,13 +650,15 @@ h2 {
 }
 
 article {
-  width: 825px;
+  width: 850px;
   margin-left: 0;
   margin-right: auto;
-  margin-top: -1000px;
+  margin-top: -1150px;
+  margin-bottom: 150px;
 }
+
 .tag-name {
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
   display: inline-block;
   width: auto;
@@ -589,7 +667,7 @@ article {
 
 .paginationjs-pages {
   display: block;
-  margin-left: 250px;
+  /* margin-left: 250px; */
   /* margin-right: 412.5px; */
   width: 385px;
   margin-top: 1200px;
@@ -637,10 +715,20 @@ article {
   display: block;
 }
 
-.modal-content {
-  width: 100%;
-  height: auto;
-  margin-top: 40%;
+.modal-dialog {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 9%;
+    margin-bottom: auto;
+    /* width: 8em  */
+}
+
+.modal .modal-content {
+  padding: 10px 10px 10px 5px;
+  -webkit-animation-name: modal-animation;
+  -webkit-animation-duration: 0.5s;
+  animation-name: modal-animation;
+  animation-duration: 0.5s;
 }
 
 .top-link {
@@ -652,5 +740,71 @@ article {
   text-align: center;
   margin-top: 80px;
   margin-bottom: 20px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
+.footer-distributed {
+  background-color: #fff;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: normal 16px sans-serif;
+  padding: 45px 50px;
+  margin-top: 100px;
+  height: 150px;
+  border-style: double;
+}
+
+.footer-distributed .footer-left p {
+  color: #8f9296;
+  font-size: 14px;
+  margin: 0;
+}
+/* Footer links */
+
+.footer-distributed p.footer-links {
+  font-size: 18px;
+  font-weight: bold;
+  color: #8f9296;
+  margin: 0 0 10px;
+  padding: 0;
+  transition: ease 0.25s;
+}
+
+.footer-distributed .footer-right {
+  float: right;
+  margin-top: 6px;
+  max-width: 180px;
+}
+
+.footer-distributed .footer-right a {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background-color: #33383b;
+  border-radius: 2px;
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 35px;
+  margin-left: 3px;
+  transition: all 0.25s;
+}
+/* Media Queries */
+
+@media (max-width: 600px) {
+  .footer-distributed .footer-left,
+  .footer-distributed .footer-right {
+    text-align: center;
+  }
+  .footer-distributed .footer-right {
+    float: none;
+    margin: 0 auto 20px;
+  }
+  .footer-distributed .footer-left p.footer-links {
+    line-height: 1.8;
+  }
 }
 </style>
