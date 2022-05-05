@@ -208,7 +208,6 @@
           <li v-for="game in myJson" :key="game.Rank" class="itemGame">
             <item-game-component id="list" :item="game"> </item-game-component>
           </li>
-
           <div class="wrapper" />
         </ul>
       </div>
@@ -244,14 +243,10 @@ import uncharted from "/src/images/banner-images/uncharted.jpg";
 import crash from "/src/images/banner-images/crash.jpg";
 import ItemGameComponent from "./components/ItemGameComponent.vue";
 import myJson from "./list/games.json";
-import "@ocrv/vue-tailwind-pagination/styles";
-// import VueTailwindPagination from '@ocrv/vue-tailwind-pagination';
 
 export default {
-  name: "PaginationExample",
   components: {
     ItemGameComponent,
-    // VueTailwindPagination,
   },
   data: function () {
     return {
@@ -293,9 +288,6 @@ export default {
         linkedin: "https://www.linkedin.com/in/almeidavi/",
         github: "https://github.com/daviialmeidaa",
       },
-      // currentPage: 1,
-      //       perPage: 12,
-      //       total: 20,
     };
   },
   methods: {
@@ -382,7 +374,7 @@ body {
 
 .searchbar {
   margin-top: 10px;
-  border-radius: 50s%;
+  /* border-radius: 50%; */
   border: none;
   height: 30px;
   width: 85%;
@@ -451,6 +443,10 @@ h2 {
   font-size: 30px;
   margin-bottom: 30px;
   font-weight: bold;
+}
+
+h3 {
+  font-size: 15px;
 }
 
 h4 {
@@ -653,7 +649,7 @@ article {
   width: 850px;
   margin-left: 0;
   margin-right: auto;
-  margin-top: -1150px;
+  margin-top: -950px;
   margin-bottom: 150px;
 }
 
@@ -716,11 +712,11 @@ article {
 }
 
 .modal-dialog {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 9%;
-    margin-bottom: auto;
-    /* width: 8em  */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 9%;
+  margin-bottom: auto;
+  /* width: 8em  */
 }
 
 .modal .modal-content {
@@ -755,6 +751,11 @@ article {
   margin-top: 100px;
   height: 150px;
   border-style: double;
+  border-top-width: 0.5px;
+  border-top-style: solid;
+  border-color: #0070c0;
+  border-right: none;
+  border-left: none;
 }
 
 .footer-distributed .footer-left p {
@@ -783,7 +784,7 @@ article {
   display: inline-block;
   width: 35px;
   height: 35px;
-  background-color: #33383b;
+  background-color: #0070c0;
   border-radius: 2px;
   font-size: 20px;
   color: #ffffff;

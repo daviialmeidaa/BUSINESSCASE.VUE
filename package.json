@@ -12,7 +12,11 @@
     "core-js": "^3.8.3",
     "jquery": "^3.6.0",
     "jw-vue-pagination": "^1.0.3",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "vue-loading-overlay": "^5.0.3",
+    "vue-pagination-tw": "^0.1.2",
+    "vue-spinner-component": "^1.0.5",
+    "vuejs-paginate-next": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
