@@ -6,22 +6,32 @@
       <div class="header-objects">
         <div class="searchbar-and-btn">
           <form action="#">
-            <input
-              class="searchbar"
-              id="searchInput"
-              type="text"
-              placeholder="Search.."
-              v-model="search"
-              data-search
-            />
-            <button
-              @click="functionSearch"
-              class="btn-search"
-              id="btnSearch"
-              type="button"
-            >
-              <i class="fa fa-search"></i>
-            </button>
+            <div class="vld-parent">
+              <loading
+                :active="isLoading"
+                :can-cancel="true"
+                :on-cancel="onCancel"
+                :is-full-page="fullPage"
+              ></loading>
+
+              <input
+                class="searchbar"
+                id="searchInput"
+                type="text"
+                placeholder="Search.."
+                v-model="search"
+                data-search
+              />
+              <button
+                @click.prevent="doAjax"
+                @click="functionSearch"
+                class="btn-search"
+                id="btnSearch"
+                type="button"
+              >
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
           </form>
         </div>
         <nav class="header">
@@ -243,10 +253,15 @@ import uncharted from "/src/images/banner-images/uncharted.jpg";
 import crash from "/src/images/banner-images/crash.jpg";
 import ItemGameComponent from "./components/ItemGameComponent.vue";
 import myJson from "./list/games.json";
+// Import component
+import Loading from "vue-loading-overlay";
+// Import stylesheet
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
   components: {
     ItemGameComponent,
+    Loading,
   },
   data: function () {
     return {
@@ -258,6 +273,7 @@ export default {
       unchartedOnPage: uncharted,
       crashOnPage: crash,
       myJson: myJson,
+      isLoading: false,
       search: "",
       myTopFive: [],
       relatedDescription: {
@@ -303,6 +319,17 @@ export default {
         );
       });
       this.myJson = stringFiltrada;
+    },
+
+    doAjax() {
+      this.isLoading = true;
+      // simulate AJAX
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 5000);
+    },
+    onCancel() {
+      console.log("User cancelled the loader.");
     },
 
     onChangePage(pageOfItems) {
@@ -649,7 +676,7 @@ article {
   width: 850px;
   margin-left: 0;
   margin-right: auto;
-  margin-top: -950px;
+  margin-top: -1000px;
   margin-bottom: 150px;
 }
 
@@ -756,6 +783,7 @@ article {
   border-color: #0070c0;
   border-right: none;
   border-left: none;
+  border-bottom: none;
 }
 
 .footer-distributed .footer-left p {
